@@ -2,20 +2,38 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-	const [toDonts, setToDonts] = useState([]);
+	const [toDonts, setToDonts] = useState([{ id: 101010101010, text: "Be productive", shamed: false, createdOn: new Date() }]);
 	const [toDont, setToDont] = useState("");
+	const [toDontId, setToDontId] = useState(0);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setToDonts([...toDonts, toDont]);
+		var newToDont = {
+			id: toDontId,
+			text: toDont,
+			shamed: false,
+			count: 0,
+			createdOn: new Date(),
+		};
+		setToDontId(toDontId + 1);
+		setToDonts([...toDonts, newToDont]);
 		setToDont("");
 	};
-
 	const handleDelete = (index) => {
 		const newToDonts = [...toDonts];
 		newToDonts.splice(index, 1);
 		setToDonts(newToDonts);
 	};
+	const handleShame = (id) => {
+		const newToDonts = [...toDonts];
+		newToDonts.map((toDont) => {
+			if (toDont.id === id) {
+				toDont.shamed = true;
+			}
+		});
+		setToDonts(newToDonts);
+	};
+
 	return (
 		<div className="App">
 			<div>
@@ -51,22 +69,34 @@ function App() {
 				</form>
 				<ul>
 					{toDonts.map((toDont, index) => (
-						<li key={index}>
-							{toDont}
+						<li key={index} alt={toDont.id}>
+							<div>
+							{toDont.text}
+							</div>
 							<button onClick={() => handleDelete(index)}>Delete</button>
+							<button onClick={() => handleShame(toDont.id)}>Shame</button>
 						</li>
 					))}
 				</ul>
 			</div>
-			{/* <div className="list">
-				<h2>My To-Don't list</h2>
-				<ul className="home-list">
-					<li>Make silly apps</li>
-					<li>be cool</li>
-					<li>use my time efficiently</li>
-					<li>be productive</li>
+			<div className="list">
+				<h1>Wall of Shame</h1>
+				<ul>
+					{toDonts.map((toDont, index) => (
+						<li key={index} alt={toDont.id}>
+							{toDont.shamed ? (
+								<div>
+									{toDont.text}
+									<br></br>
+									{toDont.count}
+								</div>
+							) : (
+								""
+							)}
+						</li>
+					))}
 				</ul>
-			</div> */}
+			</div>
 		</div>
 	);
 }
