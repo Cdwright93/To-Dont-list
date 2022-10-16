@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import ToDontCard from "./ToDontCard";
 
 function App() {
 	const [toDonts, setToDonts] = useState([{ id: 101010101010, text: "Be productive", shamed: false, createdOn: new Date() }]);
@@ -29,10 +30,21 @@ function App() {
 		newToDonts.map((toDont) => {
 			if (toDont.id === id) {
 				toDont.shamed = true;
+				handleAddCount(id);
 			}
 		});
 		setToDonts(newToDonts);
 	};
+	const handleAddCount = (id) => {
+		const newToDonts = [...toDonts];
+		newToDonts.map((toDont) => {
+			if (toDont.id === id) {
+				toDont.count = toDont.count + 1;
+			}
+		});
+		setToDonts(newToDonts);
+	};
+
 
 	return (
 		<div className="App">
@@ -54,9 +66,6 @@ function App() {
 					if you no longer need to be reminded not to do this item, click the
 					delete button to remove it from the list
 				</p>
-				{/* <a href="">To-Don't list</a> */}
-				<br></br>
-				{/* <a href="">Wall of Shame</a> */}
 				<br></br>
 				<br></br>
 				<form onSubmit={handleSubmit}>
@@ -64,31 +73,26 @@ function App() {
 						type="text"
 						value={toDont}
 						onChange={(e) => setToDont(e.target.value)}
-					/>
+						/>
 					<button type="submit">Add to list</button>
 				</form>
+						{/* <ToDontList /> */}
 				<ul>
 					{toDonts.map((toDont, index) => (
-						<li key={index} alt={toDont.id}>
-							<div>
-							{toDont.text}
-							</div>
-							<button onClick={() => handleDelete(index)}>Delete</button>
-							<button onClick={() => handleShame(toDont.id)}>Shame</button>
+						<li key={index} alt={toDont.id} className='to-dont-list-item'>
+							<ToDontCard toDont={toDont} handleDelete={handleDelete} handleShame={handleShame} handleAddCount={handleAddCount}/>
 						</li>
 					))}
 				</ul>
 			</div>
-			<div className="list">
+			{/* <div className="list">
 				<h1>Wall of Shame</h1>
 				<ul>
 					{toDonts.map((toDont, index) => (
-						<li key={index} alt={toDont.id}>
+						<li key={index} alt={toDont.id} className='to-dont-list-item'>
 							{toDont.shamed ? (
 								<div>
-									{toDont.text}
-									<br></br>
-									{toDont.count}
+						<ToDontCard toDont={toDont} handleDelete={handleDelete} handleShame={handleShame} />
 								</div>
 							) : (
 								""
@@ -96,7 +100,7 @@ function App() {
 						</li>
 					))}
 				</ul>
-			</div>
+			</div> */}
 		</div>
 	);
 }
