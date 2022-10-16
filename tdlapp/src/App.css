@@ -30,14 +30,14 @@
 .card {
   background-color: #282c34;
   color: white; 
-  border: 1px solid rgb(0, 255, 0);
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
   width: fit-content;
 }
 
-.shame-card {
+/* .shame-card {
     background-color: #282c34;
     color: white; 
     border: 1px solid rgb(255, 0, 0);
@@ -45,4 +45,4 @@
     padding: 5px;
     margin: 5px;
     width: fit-content;
-}
+} */

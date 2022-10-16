@@ -3,7 +3,7 @@ import { useState } from "react";
 import ToDontCard from "./ToDontCard";
 
 function App() {
-	const [toDonts, setToDonts] = useState([{ id: 101010101010, text: "Be productive", shamed: false, createdOn: new Date() }]);
+	const [toDonts, setToDonts] = useState([{ id: 101010101010, text: "Be productive", shamed: false, createdOn: new Date(), count: 0 }]);
 	const [toDont, setToDont] = useState("");
 	const [toDontId, setToDontId] = useState(0);
 
