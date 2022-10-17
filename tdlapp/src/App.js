@@ -73,8 +73,9 @@ function App() {
 						type="text"
 						value={toDont}
 						onChange={(e) => setToDont(e.target.value)}
+						className="input"
 						/>
-					<button type="submit">Add to list</button>
+					<button type="submit" className="submit-button">Add to list</button>
 				</form>
 						{/* <ToDontList /> */}
 				<ul>
